@@ -1,12 +1,6 @@
-"""
-Тесты для модулей после рефакторинга.
-"""
 import unittest
 from vacancy_filter import has_salary_in_range, has_required_skill, filter_vacancies
 from vacancy_stats import calculate_average_salary, count_vacancies_with_salary, get_top_skills
-
-
-# ---------- Фикстуры ----------
 
 VACANCY_WITH_SALARY = {
     "id": "1",
@@ -37,8 +31,6 @@ VACANCY_LOW_SALARY = {
 
 ALL_VACANCIES = [VACANCY_WITH_SALARY, VACANCY_NO_SALARY, VACANCY_LOW_SALARY]
 
-
-# ---------- Тесты фильтрации ----------
 
 class TestHasSalaryInRange(unittest.TestCase):
     def test_salary_within_range(self):
@@ -86,7 +78,6 @@ class TestFilterVacancies(unittest.TestCase):
         self.assertEqual(len(result), 0)
 
 
-# ---------- Тесты статистики ----------
 
 class TestCalculateAverageSalary(unittest.TestCase):
     def test_average_with_data(self):

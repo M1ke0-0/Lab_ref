@@ -1,10 +1,5 @@
-"""
-Модуль фильтрации вакансий.
-"""
-
-
 def has_salary_in_range(vacancy: dict, min_salary: int | None, max_salary: int | None) -> bool:
-    """Проверяет, входит ли зарплата вакансии в указанный диапазон."""
+
     salary_from = vacancy.get("salary_from")
     salary_to = vacancy.get("salary_to")
 
@@ -34,18 +29,6 @@ def filter_vacancies(
     max_salary: int | None = None,
     required_skill: str | None = None,
 ) -> list:
-    """
-    Фильтрует список вакансий по зарплате и наличию навыка.
-
-    Args:
-        vacancies: Список словарей с данными вакансий.
-        min_salary: Минимальная зарплата (от), может быть None.
-        max_salary: Максимальная зарплата (до), может быть None.
-        required_skill: Название требуемого навыка, может быть None.
-
-    Returns:
-        Отфильтрованный список вакансий.
-    """
     return [
         vacancy for vacancy in vacancies
         if has_salary_in_range(vacancy, min_salary, max_salary)

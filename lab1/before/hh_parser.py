@@ -3,7 +3,6 @@ import json
 import time
 import datetime
 
-# парсим вакансии
 def get_data(t, p, c, exp):
     result = []
     for i in range(p):
@@ -25,7 +24,7 @@ def get_data(t, p, c, exp):
             vac_r = requests.get(vac_url)
             vac_d = vac_r.json()
 
-            # получаем зарплату
+
             salary_from = None
             salary_to = None
             curr = None
@@ -34,23 +33,23 @@ def get_data(t, p, c, exp):
                 salary_to = vac_d["salary"].get("to")
                 curr = vac_d["salary"].get("currency")
 
-            # получаем навыки
+
             skills = []
             if vac_d.get("key_skills"):
                 for s in vac_d["key_skills"]:
                     skills.append(s["name"])
 
-            # получаем опыт
+
             exp_name = None
             if vac_d.get("experience"):
                 exp_name = vac_d["experience"]["name"]
 
-            # получаем работодателя
+
             employer_name = None
             if vac_d.get("employer"):
                 employer_name = vac_d["employer"]["name"]
 
-            # получаем адрес
+
             addr = None
             if vac_d.get("address"):
                 addr = vac_d["address"].get("raw")
@@ -72,13 +71,13 @@ def get_data(t, p, c, exp):
         time.sleep(0.5)
     return result
 
-# сохраняем данные
+
 def sv(data, fn):
     f = open(fn, "w", encoding="utf-8")
     json.dump(data, f, ensure_ascii=False, indent=2)
     f.close()
 
-# фильтруем данные
+
 def flt(data, min_s, max_s, skill):
     r = []
     for v in data:
@@ -103,7 +102,7 @@ def flt(data, min_s, max_s, skill):
             r.append(v)
     return r
 
-# выводим статистику
+
 def stats(data):
     total = len(data)
     with_salary = 0
@@ -119,7 +118,7 @@ def stats(data):
     if count_s > 0:
         avg = total_s / count_s
 
-    # считаем навыки
+
     skill_counts = {}
     for v in data:
         for s in v["skills"]:
@@ -136,7 +135,7 @@ def stats(data):
     for sk, cnt in sorted_skills[:5]:
         print(" -", sk, ":", cnt)
 
-# главная функция
+
 if __name__ == "__main__":
     query = "python developer"
     pages = 3
